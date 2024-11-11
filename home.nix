@@ -12,6 +12,7 @@
   home.packages = [
 
     pkgs.hello # friendly hello message when used in terminal
+    pkgs.ripgrep
 
   ];
 
@@ -41,11 +42,26 @@
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
+            
+    extraLuaConfig = ''
+        -- Write lua code here
+
+        -- or inter polate files like this:
+
+        ${builtins.readFile ./nvim/options.lua}
+        ${builtins.readFile ./nvim/mappings.lua}
+
+    '';
 
     plugins = with pkgs.vimPlugins; [
       {
-        plugin = gruvbox-nvim;
-        config = "colorscheme gruvbox";
+        plugin = tokyonight-nvim;
+        config = "colorscheme tokyonight";
+      }
+
+      {
+        plugin = vim-fugitive;
+        config = toLuaFile ./nvim/plugin/fugitive.lua;
       }
 
       {
@@ -68,14 +84,6 @@
       }
     ];
 
-    extraLuaConfig = ''
-        -- Write lua code here
-
-        -- or inter polate files like this:
-
-        ${builtins.readFile ./nvim/options.lua}
-
-    '';
   };
   
   home.stateVersion = "23.05"; # Please read the comment before changing.
