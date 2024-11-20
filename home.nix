@@ -29,6 +29,16 @@
     enable = true;
     userEmail = "hollenbeckfl@tutanota.com";
     userName = "Finn Hollenbeck";
+
+    aliases = {
+        s = "status";
+        co = "checkout";
+        br = "branch";
+        ci = "commit";
+        df = "diff";
+        lg = "log --oneline --graph --decorate --all";
+    };
+
   };
 
   programs.neovim = 
